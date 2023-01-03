@@ -11,14 +11,15 @@ function Playlists() {
         }
     }
 
-    const getAllPlaylists = () => {
-        axios.get("https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists",headers)
-        .then((res) => {
-            setPlaylists(res.data.result.list);
-        })
-        .catch((erro) => {
+    const getAllPlaylists = async() => {
+        try{
+            const result = await axios
+            .get("https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists",
+            headers)
+            setPlaylists(result.data.result.list);
+        }catch(erro){
             alert(erro.response);
-        })
+        }
     }
 
     useEffect(()=>{
@@ -28,7 +29,7 @@ function Playlists() {
     return (
         <div>
             {playlists.map((playlist) => {
-                return <Musicas key={playlist.id} playlist={playlist} idPlaylist={playlist.id}/>
+                return <Musicas key={playlist.id} playlist={playlist} idPlaylist={playlist.id} setPlaylists={setPlaylists} getAllPlaylists={getAllPlaylists}/>
             })}
 
         </div>

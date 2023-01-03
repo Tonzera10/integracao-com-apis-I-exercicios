@@ -32,3 +32,9 @@ export const InputMusica = styled.input`
 export const Botao = styled.button`
     width: 10vw;
 `
+export const StyleHeader = styled.header`
+    background-color: blueviolet;
+    height: 50px;
+    width: auto;
+    `
+
