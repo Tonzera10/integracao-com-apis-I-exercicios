@@ -5,19 +5,15 @@ import {
   ContainerMusicas,
   InputMusica,
   Musica,
-  StyleHeader,
-  StyleLabel,
 } from "./styled";
 import axios from "axios";
-import Playlists from "../Playlists/Playlists";
-import { Header } from "../Header/Header";
 
 export default function Musicas(props) {
   const [musicas, setMusicas] = useState([]);
   const [artist, setArtist] = useState("");
   const [music, setMusic] = useState("");
   const [url, setUrl] = useState("");
-  const [novaPlaylist, setNovaPlaylist] = useState("")
+  
 
   const headers = {
     headers: {
@@ -81,35 +77,11 @@ export default function Musicas(props) {
     }
   }
 
-  const createPlaylist = async(nome) => {
-    const body = {
-      name: nome
-    }
-    try{
-      const result = await axios
-    .post(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists`, body, headers);
-    props.setPlaylists(...props.playlists,result);
-    props.setNovaPlaylist("")
-    props.getAllPlaylists()
-    console.log(props.playlists);
-  }catch(err){
-    alert(err.response)
-    console.log(err.response)
-  }
-}
-
-
   useEffect(() => {
     getPlaylistTracks();
   }, []);
 
   return (
-    <>
-    <Header
-    setNovaPlaylist={setNovaPlaylist}
-    novaPlaylist={novaPlaylist}
-    createPlaylist={createPlaylist}
-    />
     <ContainerMusicas>
       <h2>{props.playlist.name}</h2>
       <button onClick={() => deletePlaylist()}>X</button>
@@ -145,6 +117,5 @@ export default function Musicas(props) {
         </Botao>
       </ContainerInputs>
     </ContainerMusicas>
-    </>
   );
 }
